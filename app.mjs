@@ -4,7 +4,8 @@ import methodOverride from 'method-override';
 import superHeroRoutes from './routes/superHeroRoutes.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+// sprint 4.
+import expressLayouts from 'express-ejs-layouts';
 //sprint 3. Etapa 3
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,6 +17,15 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 // Configura EJS como el DIRECTORIO de vistas en Extress. Sprint 3. tp 3.
 app.set('views', path.join(__dirname, 'views'));
+
+// sprint 4:
+//app.set('views', path.resolve( './views'));
+// Configurar express-ejs-layouts
+app.use(expressLayouts);
+app.set('layout', 'layout'); // Archivo base de layout
+// Servir archivos estáticos
+app.use(express.static(path.resolve('./public')));
+
 
 //Middleware para procesar datos del formulario. Permite leer las peticiones. Sprint 3. tp 3. Etapa 5.
 app.use(express.urlencoded({ extended: false }));
